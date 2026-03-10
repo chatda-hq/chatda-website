@@ -1,152 +1,166 @@
 /*
- * DESIGN: Neural Cartography
- * Dark bg with deployment-bg image. 3 deployment cards.
- * Security-focused visual treatment for Private Cloud and On-Premise.
+ * Deployment section — 3 detailed cards with "Best For" descriptions.
+ * Reverted to the previous draft's more informative card style.
  */
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Cloud, Server, Shield } from "lucide-react";
 
-const DEPLOYMENT_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663286076356/hAc3YyuRHV9HMDHK4pqFrQ/deployment-bg-42HVB9YMUoS4N7N26SVNj9.webp";
+const DEPLOY_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663286076356/hAc3YyuRHV9HMDHK4pqFrQ/deployment-bg-aMjJyLxqDPbKCWPNHNjjVN.webp";
 
 const deployments = [
   {
     icon: Cloud,
-    title: "Chatda Cloud",
-    description: "Fully hosted SaaS. Fastest to onboard. Standard cloud security.",
-    bestFor: "SMEs, tech companies comfortable with cloud AI workflows.",
-    accent: "#2ECDA7",
+    title: "Cloud SaaS",
+    description:
+      "Fully hosted and managed by Chatda. Zero infrastructure overhead — just connect your tools and go.",
+    bestFor: "Teams that want the fastest path to value with minimal IT involvement.",
+    accent: "#00D9A6",
+    accentRgba: "0,217,166",
   },
   {
     icon: Server,
     title: "Private Cloud",
     description:
-      "Deployed in your cloud (GCP, AWS, Azure). You control the infrastructure.",
-    bestFor: "Government, regulated industries, data residency requirements.",
+      "Deployed within your own cloud environment (AWS, GCP, Azure). You control the infrastructure, we manage the software.",
+    bestFor: "Organizations with data residency requirements or existing cloud investments.",
     accent: "#7C6BF0",
+    accentRgba: "124,107,240",
   },
   {
     icon: Shield,
     title: "On-Premise",
     description:
-      "Fully isolated. No external calls. Runs with locally hosted models.",
-    bestFor: "Defense, intelligence, highest-security environments.",
+      "Fully isolated deployment behind your firewall. Air-gapped option available. Zero external network calls.",
+    bestFor: "Regulated industries (finance, defense, healthcare) with strict data sovereignty needs.",
     accent: "#7C6BF0",
+    accentRgba: "124,107,240",
   },
 ];
 
 export default function DeploymentSection() {
-  const { ref, isVisible } = useScrollAnimation(0.1);
+  const { ref, isVisible } = useScrollAnimation(0.08);
 
   return (
     <section
-      id="deployment"
-      className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ backgroundColor: "#1A1A2E" }}
+      id="about"
+      className="relative py-32 lg:py-44 overflow-hidden"
       ref={ref}
     >
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src={DEPLOYMENT_BG}
+          src={DEPLOY_BG}
           alt=""
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-20"
           aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, #0A0A16 0%, rgba(10,10,22,0.92) 40%, rgba(10,10,22,0.92) 60%, #0D0D1A 100%)",
+          }}
         />
       </div>
 
       <div className="container relative z-10">
-        {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        {/* Headline */}
+        <motion.h2
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.1] tracking-tight text-white max-w-3xl"
+          initial={{ opacity: 0, y: 25 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">05 // Deployment</span>
-        </motion.div>
+          Deploy on{" "}
+          <span style={{ color: "#00D9A6" }}>your terms.</span>
+        </motion.h2>
 
-        {/* Headline */}
-        <motion.h2
-          className="mt-4 text-3xl sm:text-4xl lg:text-[44px] font-bold leading-tight tracking-tight text-white"
+        <motion.p
+          className="mt-5 text-lg max-w-2xl"
+          style={{ color: "rgba(255,255,255,0.4)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Deploy on <span style={{ color: "#2ECDA7" }}>your terms.</span>
-        </motion.h2>
-
-        <motion.p
-          className="mt-4 text-lg max-w-2xl"
-          style={{ color: "rgba(255,255,255,0.6)" }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          Same product, your infrastructure, your rules. Choose the deployment
-          model that fits your security and compliance requirements.
+          Choose the deployment model that fits your security posture and compliance requirements.
         </motion.p>
 
         {/* Cards */}
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-6">
           {deployments.map((dep, index) => (
             <motion.div
               key={dep.title}
-              className="group relative p-8 rounded-xl glass-card-dark transition-all duration-300"
+              className="group relative rounded-2xl overflow-hidden transition-all duration-300"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.06)",
+              }}
               initial={{ opacity: 0, y: 30 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
+              transition={{ duration: 0.5, delay: 0.15 + index * 0.12 }}
               whileHover={{
-                y: -4,
-                boxShadow: `0 12px 40px rgba(0, 0, 0, 0.3)`,
+                backgroundColor: "rgba(255,255,255,0.05)",
+                borderColor: `rgba(${dep.accentRgba},0.2)`,
               }}
             >
-              {/* Top accent line */}
+              {/* Top accent bar */}
               <div
-                className="absolute top-0 left-6 right-6 h-[2px] rounded-full"
-                style={{ backgroundColor: dep.accent, opacity: 0.6 }}
+                className="h-1 w-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ backgroundColor: dep.accent }}
               />
 
-              {/* Icon */}
-              <div
-                className="w-12 h-12 rounded-lg flex items-center justify-center mb-5"
-                style={{ backgroundColor: `${dep.accent}15` }}
-              >
-                <dep.icon size={22} style={{ color: dep.accent }} strokeWidth={1.5} />
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-semibold text-white mb-3">
-                {dep.title}
-              </h3>
-
-              {/* Description */}
-              <p
-                className="text-base leading-relaxed mb-5"
-                style={{ color: "rgba(255,255,255,0.6)" }}
-              >
-                {dep.description}
-              </p>
-
-              {/* Best for */}
-              <div
-                className="pt-4"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
-              >
-                <span
-                  className="text-xs font-medium"
+              <div className="p-8 lg:p-9">
+                {/* Icon */}
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
                   style={{
-                    color: dep.accent,
-                    fontFamily: "'JetBrains Mono', monospace",
+                    backgroundColor: `rgba(${dep.accentRgba},0.08)`,
+                    border: `1px solid rgba(${dep.accentRgba},0.12)`,
                   }}
                 >
-                  BEST FOR
-                </span>
+                  <dep.icon
+                    size={26}
+                    style={{ color: dep.accent }}
+                    strokeWidth={1.5}
+                  />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  {dep.title}
+                </h3>
+
+                {/* Description */}
                 <p
-                  className="mt-1 text-sm"
-                  style={{ color: "rgba(255,255,255,0.5)" }}
+                  className="text-sm leading-relaxed mb-6"
+                  style={{ color: "rgba(255,255,255,0.45)" }}
                 >
-                  {dep.bestFor}
+                  {dep.description}
                 </p>
+
+                {/* Best For */}
+                <div
+                  className="pt-5"
+                  style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+                >
+                  <p
+                    className="text-xs font-semibold uppercase tracking-wider mb-2"
+                    style={{
+                      color: dep.accent,
+                      fontFamily: "'JetBrains Mono', monospace",
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    Best For
+                  </p>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.35)" }}
+                  >
+                    {dep.bestFor}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

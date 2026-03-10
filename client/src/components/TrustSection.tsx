@@ -1,11 +1,11 @@
 /*
  * DESIGN: Neural Cartography
  * Light surface bg. Founding team credentials, credibility markers.
- * Pre-revenue V1 content with placeholders for future proof points.
+ * Pre-revenue V1 content — honest, aspirational framing. No overclaiming.
  */
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Users, MapPin, ShieldCheck, Plug, Award } from "lucide-react";
+import { Users, MapPin, ShieldCheck, Plug } from "lucide-react";
 
 const credibilityMarkers = [
   {
@@ -24,13 +24,13 @@ const credibilityMarkers = [
     icon: ShieldCheck,
     title: "Governance-First Architecture",
     description:
-      "Compliance-ready from day one. Full audit trails, permission-aware queries, and deployment flexibility built into the core — not bolted on.",
+      "Designed for compliance from day one. Full audit trails, permission-aware queries, and deployment flexibility built into the core — not bolted on.",
   },
   {
     icon: Plug,
-    title: "20+ Integrations Supported",
+    title: "Growing Integration Ecosystem",
     description:
-      "Connect Slack, Notion, Google Workspace, Jira, Confluence, CRMs, and more. One-click connectors with enterprise-grade security.",
+      "Designed to connect with Slack, Notion, Google Workspace, Jira, Confluence, CRMs, and more. Enterprise-grade connectors on our roadmap.",
   },
 ];
 
@@ -62,7 +62,7 @@ export default function TrustSection() {
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Trusted by{" "}
+          Built for{" "}
           <span style={{ color: "#2ECDA7" }}>forward-thinking teams.</span>
         </motion.h2>
 
@@ -104,36 +104,6 @@ export default function TrustSection() {
             </motion.div>
           ))}
         </div>
-
-        {/* Stats / proof points placeholder */}
-        <motion.div
-          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          {[
-            { value: "20+", label: "Integrations" },
-            { value: "SOC 2", label: "Compliance Ready" },
-            { value: "3", label: "Deployment Models" },
-            { value: "< 2s", label: "Query Response" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center p-5">
-              <div
-                className="text-3xl lg:text-4xl font-bold"
-                style={{ color: "#2ECDA7", fontFamily: "'JetBrains Mono', monospace" }}
-              >
-                {stat.value}
-              </div>
-              <div
-                className="mt-2 text-sm font-medium"
-                style={{ color: "rgba(26, 26, 46, 0.5)" }}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

@@ -1,48 +1,32 @@
 /*
- * DESIGN: Neural Cartography
- * White bg, 2-column grid of 6 feature cards. Glassmorphism hover.
- * Teal icon accents. JetBrains Mono section label.
+ * Simplified capabilities — 3 cards with enhanced visual effects.
+ * Animated icon glows, gradient borders on hover, ambient orbs.
  */
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Search, Plug, Lock, Network, Cloud, ClipboardCheck } from "lucide-react";
+import { Search, Brain, Lock } from "lucide-react";
 
 const capabilities = [
   {
     icon: Search,
     title: "Universal Search",
-    description:
-      "Search across every connected tool from a single interface. Get answers grounded in your actual institutional data — not generic AI guesses.",
+    description: "One interface to search across every connected tool in your organization.",
+    accent: "#00D9A6",
+    accentRgba: "0,217,166",
   },
   {
-    icon: Plug,
-    title: "AI Context API",
-    description:
-      "Give any AI agent — internal or third-party — instant access to structured organizational context. Reduce token cost, latency, and hallucination.",
+    icon: Brain,
+    title: "Institutional Memory",
+    description: "Captures entities, relationships, decisions, and the reasoning behind them — building a living map of your organization.",
+    accent: "#7C6BF0",
+    accentRgba: "124,107,240",
   },
   {
     icon: Lock,
     title: "Permission-Aware",
-    description:
-      "Every query respects your existing access controls. Users only see what they are authorized to see. No permission bypass, ever.",
-  },
-  {
-    icon: Network,
-    title: "Knowledge Graph",
-    description:
-      "Chatda captures entities, relationships, decisions, and the reasoning behind them — building a living map of your organization's institutional memory.",
-  },
-  {
-    icon: Cloud,
-    title: "Deployment Flexibility",
-    description:
-      "Run on our cloud, your cloud, or fully on-premise. Same product, your infrastructure, your rules. Air-gapped options available.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Governance & Audit",
-    description:
-      "Full audit trails for every query and every AI interaction. Know who accessed what, when, and why. Compliance-ready from day one.",
+    description: "Users only see what they are authorised to see.",
+    accent: "#00D9A6",
+    accentRgba: "0,217,166",
   },
 ];
 
@@ -50,71 +34,119 @@ export default function CapabilitiesSection() {
   const { ref, isVisible } = useScrollAnimation(0.08);
 
   return (
-    <section id="capabilities" className="py-24 lg:py-32 bg-white" ref={ref}>
-      <div className="container">
-        {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+    <section
+      className="relative py-32 lg:py-44 overflow-hidden"
+      style={{ backgroundColor: "#0D0D1A" }}
+      ref={ref}
+    >
+      {/* Ambient gradient */}
+      <motion.div
+        className="absolute rounded-full blur-[140px]"
+        style={{
+          width: 500,
+          height: 500,
+          top: "20%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "radial-gradient(circle, rgba(0,217,166,0.04) 0%, transparent 70%)",
+        }}
+        animate={{
+          scale: [1, 1.1, 0.95, 1],
+        }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Subtle cross-hatch pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="capGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#7C6BF0" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#capGrid)" />
+        </svg>
+      </div>
+
+      <div className="container relative z-10">
+        {/* Headline */}
+        <motion.h2
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.1] tracking-tight text-white max-w-3xl"
+          initial={{ opacity: 0, y: 25 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">04 // Core Capabilities</span>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h2
-          className="mt-4 text-3xl sm:text-4xl lg:text-[44px] font-bold leading-tight tracking-tight"
-          style={{ color: "#1A1A2E" }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
           Built for{" "}
-          <span style={{ color: "#2ECDA7" }}>enterprise reality.</span>
+          <span style={{ color: "#00D9A6" }}>enterprise reality.</span>
         </motion.h2>
 
-        {/* Cards grid */}
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Cards */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           {capabilities.map((cap, index) => (
             <motion.div
               key={cap.title}
-              className="group relative p-7 rounded-xl border transition-all duration-300"
+              className="group relative p-8 md:p-10 rounded-2xl transition-all duration-300 overflow-hidden"
               style={{
-                backgroundColor: "rgba(247, 248, 250, 0.5)",
-                borderColor: "rgba(26, 26, 46, 0.06)",
+                backgroundColor: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.06)",
               }}
               initial={{ opacity: 0, y: 30 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
+              transition={{ duration: 0.5, delay: 0.15 + index * 0.12 }}
               whileHover={{
-                y: -4,
-                boxShadow: "0 12px 40px rgba(26, 26, 46, 0.08)",
+                backgroundColor: "rgba(255,255,255,0.05)",
+                borderColor: `rgba(${cap.accentRgba},0.2)`,
               }}
             >
-              {/* Icon */}
+              {/* Hover glow effect */}
               <div
-                className="w-11 h-11 rounded-lg flex items-center justify-center mb-5 transition-colors duration-300"
-                style={{ backgroundColor: "rgba(46, 205, 167, 0.08)" }}
-              >
-                <cap.icon
-                  size={20}
-                  style={{ color: "#2ECDA7" }}
-                  strokeWidth={1.5}
+                className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-[0.12] transition-opacity duration-500"
+                style={{ backgroundColor: cap.accent }}
+              />
+
+              {/* Icon with animated ring */}
+              <div className="relative mb-6">
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center relative z-10"
+                  style={{
+                    backgroundColor: `rgba(${cap.accentRgba},0.08)`,
+                    border: `1px solid rgba(${cap.accentRgba},0.12)`,
+                  }}
+                >
+                  <cap.icon
+                    size={26}
+                    style={{ color: cap.accent }}
+                    strokeWidth={1.5}
+                  />
+                </div>
+                {/* Pulsing ring behind icon */}
+                <motion.div
+                  className="absolute inset-0 rounded-xl"
+                  style={{
+                    border: `1px solid rgba(${cap.accentRgba},0.15)`,
+                  }}
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.3, 0, 0.3],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: index * 0.5,
+                    ease: "easeInOut",
+                  }}
                 />
               </div>
 
               {/* Title */}
-              <h3
-                className="text-lg font-semibold mb-2"
-                style={{ color: "#1A1A2E" }}
-              >
+              <h3 className="text-xl font-semibold text-white mb-3">
                 {cap.title}
               </h3>
 
               {/* Description */}
               <p
-                className="text-sm leading-relaxed"
-                style={{ color: "rgba(26, 26, 46, 0.6)" }}
+                className="text-base leading-relaxed"
+                style={{ color: "rgba(255,255,255,0.4)" }}
               >
                 {cap.description}
               </p>

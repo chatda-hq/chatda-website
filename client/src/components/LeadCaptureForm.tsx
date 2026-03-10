@@ -1,6 +1,5 @@
 /*
- * DESIGN: Neural Cartography
- * Modal overlay with glassmorphism. Clean form with teal accent.
+ * Lead capture modal — dark theme, green accent, clean form.
  * Fields: Name, Email, Company, Size, Use Case, Message.
  */
 import { useState } from "react";
@@ -26,7 +25,6 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In production, this would submit to a CRM or API
     setSubmitted(true);
     toast.success("Thank you! We'll be in touch within 24 hours.");
   };
@@ -50,6 +48,12 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
     onClose();
   };
 
+  const inputStyle = {
+    borderColor: "rgba(255,255,255,0.08)",
+    color: "#FFFFFF",
+    backgroundColor: "rgba(255,255,255,0.04)",
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -63,7 +67,7 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
           {/* Backdrop */}
           <div
             className="absolute inset-0"
-            style={{ backgroundColor: "rgba(26, 26, 46, 0.8)", backdropFilter: "blur(4px)" }}
+            style={{ backgroundColor: "rgba(8, 8, 26, 0.85)", backdropFilter: "blur(8px)" }}
             onClick={handleClose}
           />
 
@@ -71,8 +75,8 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
           <motion.div
             className="relative w-full max-w-lg rounded-2xl p-8 shadow-2xl overflow-y-auto max-h-[90vh]"
             style={{
-              backgroundColor: "#FFFFFF",
-              border: "1px solid rgba(26, 26, 46, 0.08)",
+              backgroundColor: "#141428",
+              border: "1px solid rgba(255,255,255,0.06)",
             }}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -83,54 +87,47 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
             <button
               onClick={handleClose}
               className="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
-              style={{ color: "rgba(26, 26, 46, 0.4)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#1A1A2E")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(26, 26, 46, 0.4)")}
+              style={{ color: "rgba(255,255,255,0.3)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.3)")}
               aria-label="Close form"
             >
               <X size={18} />
             </button>
 
             {submitted ? (
-              /* Success state */
               <div className="text-center py-8">
                 <div
                   className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
-                  style={{ backgroundColor: "rgba(46, 205, 167, 0.1)" }}
+                  style={{ backgroundColor: "rgba(0, 217, 166, 0.1)" }}
                 >
-                  <CheckCircle size={32} style={{ color: "#2ECDA7" }} />
+                  <CheckCircle size={32} style={{ color: "#00D9A6" }} />
                 </div>
-                <h3 className="text-2xl font-bold mb-2" style={{ color: "#1A1A2E" }}>
+                <h3 className="text-2xl font-bold mb-2 text-white">
                   Thank you!
                 </h3>
-                <p className="text-base mb-6" style={{ color: "rgba(26, 26, 46, 0.6)" }}>
-                  We'll be in touch within 24 hours. In the meantime, feel free
-                  to explore the rest of the page.
+                <p className="text-base mb-6" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  We'll be in touch within 24 hours.
                 </p>
                 <a
                   href="mailto:hello@chatda.ai"
                   className="text-sm font-medium transition-colors"
-                  style={{ color: "#7C6BF0" }}
+                  style={{ color: "#00D9A6" }}
                 >
-                  Or book a call directly →
+                  Or reach out directly →
                 </a>
               </div>
             ) : (
-              /* Form */
               <>
                 <div className="mb-6">
-                  <span className="section-label">Start Your Pilot</span>
-                  <h3
-                    className="mt-2 text-2xl font-bold"
-                    style={{ color: "#1A1A2E" }}
-                  >
-                    Let's get you started.
+                  <h3 className="text-2xl font-bold text-white">
+                    Start Your Pilot
                   </h3>
                   <p
                     className="mt-1 text-sm"
-                    style={{ color: "rgba(26, 26, 46, 0.5)" }}
+                    style={{ color: "rgba(255,255,255,0.4)" }}
                   >
-                    Fill out the form and our team will reach out within 24 hours.
+                    We'll reach out within 24 hours.
                   </p>
                 </div>
 
@@ -139,8 +136,7 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                   <div>
                     <label
                       htmlFor="fullName"
-                      className="block text-sm font-medium mb-1.5"
-                      style={{ color: "#1A1A2E" }}
+                      className="block text-sm font-medium mb-1.5 text-white"
                     >
                       Full Name *
                     </label>
@@ -151,14 +147,10 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                       required
                       value={formData.fullName}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-colors"
-                      style={{
-                        borderColor: "rgba(26, 26, 46, 0.12)",
-                        color: "#1A1A2E",
-                        backgroundColor: "#F7F8FA",
-                      }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#2ECDA7")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26, 26, 46, 0.12)")}
+                      className="w-full px-4 py-3 rounded-xl text-sm border outline-none transition-colors"
+                      style={inputStyle}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#00D9A6")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
                       placeholder="Your full name"
                     />
                   </div>
@@ -167,8 +159,7 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium mb-1.5"
-                      style={{ color: "#1A1A2E" }}
+                      className="block text-sm font-medium mb-1.5 text-white"
                     >
                       Work Email *
                     </label>
@@ -179,14 +170,10 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-colors"
-                      style={{
-                        borderColor: "rgba(26, 26, 46, 0.12)",
-                        color: "#1A1A2E",
-                        backgroundColor: "#F7F8FA",
-                      }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#2ECDA7")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26, 26, 46, 0.12)")}
+                      className="w-full px-4 py-3 rounded-xl text-sm border outline-none transition-colors"
+                      style={inputStyle}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#00D9A6")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
                       placeholder="you@company.com"
                     />
                   </div>
@@ -195,8 +182,7 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                   <div>
                     <label
                       htmlFor="company"
-                      className="block text-sm font-medium mb-1.5"
-                      style={{ color: "#1A1A2E" }}
+                      className="block text-sm font-medium mb-1.5 text-white"
                     >
                       Company Name *
                     </label>
@@ -207,14 +193,10 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                       required
                       value={formData.company}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-colors"
-                      style={{
-                        borderColor: "rgba(26, 26, 46, 0.12)",
-                        color: "#1A1A2E",
-                        backgroundColor: "#F7F8FA",
-                      }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#2ECDA7")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26, 26, 46, 0.12)")}
+                      className="w-full px-4 py-3 rounded-xl text-sm border outline-none transition-colors"
+                      style={inputStyle}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#00D9A6")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
                       placeholder="Your company"
                     />
                   </div>
@@ -223,8 +205,7 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                   <div>
                     <label
                       htmlFor="companySize"
-                      className="block text-sm font-medium mb-1.5"
-                      style={{ color: "#1A1A2E" }}
+                      className="block text-sm font-medium mb-1.5 text-white"
                     >
                       Company Size *
                     </label>
@@ -234,14 +215,13 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                       required
                       value={formData.companySize}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-colors appearance-none"
+                      className="w-full px-4 py-3 rounded-xl text-sm border outline-none transition-colors appearance-none"
                       style={{
-                        borderColor: "rgba(26, 26, 46, 0.12)",
-                        color: formData.companySize ? "#1A1A2E" : "rgba(26, 26, 46, 0.4)",
-                        backgroundColor: "#F7F8FA",
+                        ...inputStyle,
+                        color: formData.companySize ? "#FFFFFF" : "rgba(255,255,255,0.35)",
                       }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#2ECDA7")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26, 26, 46, 0.12)")}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#00D9A6")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
                     >
                       <option value="" disabled>Select company size</option>
                       <option value="1-50">1–50 employees</option>
@@ -255,8 +235,7 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                   <div>
                     <label
                       htmlFor="useCase"
-                      className="block text-sm font-medium mb-1.5"
-                      style={{ color: "#1A1A2E" }}
+                      className="block text-sm font-medium mb-1.5 text-white"
                     >
                       Primary Use Case
                     </label>
@@ -265,14 +244,13 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                       name="useCase"
                       value={formData.useCase}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-colors appearance-none"
+                      className="w-full px-4 py-3 rounded-xl text-sm border outline-none transition-colors appearance-none"
                       style={{
-                        borderColor: "rgba(26, 26, 46, 0.12)",
-                        color: formData.useCase ? "#1A1A2E" : "rgba(26, 26, 46, 0.4)",
-                        backgroundColor: "#F7F8FA",
+                        ...inputStyle,
+                        color: formData.useCase ? "#FFFFFF" : "rgba(255,255,255,0.35)",
                       }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#2ECDA7")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26, 26, 46, 0.12)")}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#00D9A6")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
                     >
                       <option value="">Select use case (optional)</option>
                       <option value="enterprise-search">Enterprise Search</option>
@@ -286,8 +264,7 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                   <div>
                     <label
                       htmlFor="message"
-                      className="block text-sm font-medium mb-1.5"
-                      style={{ color: "#1A1A2E" }}
+                      className="block text-sm font-medium mb-1.5 text-white"
                     >
                       Message
                     </label>
@@ -297,14 +274,10 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                       rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-colors resize-none"
-                      style={{
-                        borderColor: "rgba(26, 26, 46, 0.12)",
-                        color: "#1A1A2E",
-                        backgroundColor: "#F7F8FA",
-                      }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#2ECDA7")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(26, 26, 46, 0.12)")}
+                      className="w-full px-4 py-3 rounded-xl text-sm border outline-none transition-colors resize-none"
+                      style={inputStyle}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#00D9A6")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
                       placeholder="Tell us about your needs (optional)"
                     />
                   </div>
@@ -312,15 +285,15 @@ export default function LeadCaptureForm({ isOpen, onClose }: LeadCaptureFormProp
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-lg text-base font-semibold transition-all duration-200 cta-glow mt-2"
-                    style={{ backgroundColor: "#2ECDA7", color: "#1A1A2E" }}
+                    className="w-full py-3.5 rounded-full text-base font-semibold transition-all duration-200 cta-glow mt-2"
+                    style={{ backgroundColor: "#00D9A6", color: "#0D0D1A" }}
                   >
                     Submit Pilot Request
                   </button>
 
                   <p
                     className="text-xs text-center mt-3"
-                    style={{ color: "rgba(26, 26, 46, 0.4)" }}
+                    style={{ color: "rgba(255,255,255,0.25)" }}
                   >
                     We respect your privacy. No spam, ever.
                   </p>
