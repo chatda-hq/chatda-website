@@ -43,7 +43,7 @@ export default function HeroSection({ onOpenForm }: HeroSectionProps) {
             height: 500,
             top: "-10%",
             right: "-5%",
-            background: "radial-gradient(circle, rgba(0,217,166,0.12) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(0,217,166,0.18) 0%, rgba(0,217,166,0.04) 40%, transparent 70%)",
           }}
           animate={{
             x: [0, 30, -20, 0],
@@ -60,7 +60,7 @@ export default function HeroSection({ onOpenForm }: HeroSectionProps) {
             height: 400,
             bottom: "5%",
             left: "10%",
-            background: "radial-gradient(circle, rgba(124,107,240,0.08) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(124,107,240,0.15) 0%, rgba(124,107,240,0.04) 40%, transparent 70%)",
           }}
           animate={{
             x: [0, -25, 15, 0],
@@ -88,7 +88,7 @@ export default function HeroSection({ onOpenForm }: HeroSectionProps) {
       </div>
 
       {/* Animated grid overlay */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.04]">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.06]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="heroGrid" width="60" height="60" patternUnits="userSpaceOnUse">
@@ -184,7 +184,16 @@ export default function HeroSection({ onOpenForm }: HeroSectionProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             Your organization's knowledge,{" "}
-            <span style={{ color: "#00D9A6" }}>structured for AI.</span>
+            <span
+              style={{
+                background: "linear-gradient(135deg, #00D9A6 0%, #7C6BF0 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              structured for AI.
+            </span>
           </motion.h1>
 
           {/* Short description */}

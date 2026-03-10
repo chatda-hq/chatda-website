@@ -32,9 +32,34 @@ export default function CTASection({ onOpenForm }: CTASectionProps) {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 50%, rgba(0,217,166,0.06) 0%, rgba(13,13,26,0.95) 65%)",
+              "radial-gradient(ellipse at 50% 50%, rgba(0,217,166,0.1) 0%, rgba(124,107,240,0.06) 35%, rgba(13,13,26,0.95) 65%)",
           }}
         />
+      </div>
+
+      {/* Animated concentric rings */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {[300, 500, 700].map((size, i) => (
+          <motion.div
+            key={size}
+            className="absolute rounded-full"
+            style={{
+              width: size,
+              height: size,
+              border: `1px solid rgba(0,217,166,${0.08 - i * 0.02})`,
+            }}
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 4 + i * 2,
+              repeat: Infinity,
+              delay: i * 0.8,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
       </div>
 
       <div className="container relative z-10 text-center">
@@ -46,7 +71,16 @@ export default function CTASection({ onOpenForm }: CTASectionProps) {
           transition={{ duration: 0.6 }}
         >
           Ready to give your organization{" "}
-          <span style={{ color: "#00D9A6" }}>a brain?</span>
+          <span
+            style={{
+              background: "linear-gradient(135deg, #00D9A6 0%, #7C6BF0 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            a brain?
+          </span>
         </motion.h2>
 
         {/* Subtext */}

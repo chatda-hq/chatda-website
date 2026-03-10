@@ -16,15 +16,15 @@ export default function ProblemSolutionSection() {
       style={{ backgroundColor: "#0D0D1A" }}
       ref={ref}
     >
-      {/* Ambient gradient orbs */}
+      {/* Ambient gradient orbs — stronger */}
       <motion.div
         className="absolute rounded-full blur-[120px]"
         style={{
-          width: 450,
-          height: 450,
+          width: 550,
+          height: 550,
           top: "10%",
           right: "-8%",
-          background: "radial-gradient(circle, rgba(0,217,166,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(0,217,166,0.14) 0%, rgba(0,217,166,0.04) 40%, transparent 70%)",
         }}
         animate={{
           x: [0, -20, 10, 0],
@@ -35,11 +35,11 @@ export default function ProblemSolutionSection() {
       <motion.div
         className="absolute rounded-full blur-[100px]"
         style={{
-          width: 350,
-          height: 350,
+          width: 450,
+          height: 450,
           bottom: "5%",
           left: "-5%",
-          background: "radial-gradient(circle, rgba(124,107,240,0.05) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(124,107,240,0.12) 0%, rgba(124,107,240,0.03) 40%, transparent 70%)",
         }}
         animate={{
           x: [0, 15, -10, 0],
@@ -47,9 +47,18 @@ export default function ProblemSolutionSection() {
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
+      {/* Horizontal moving gradient band */}
+      <motion.div
+        className="absolute left-0 right-0 h-[1px] pointer-events-none"
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(0,217,166,0.15) 30%, rgba(124,107,240,0.15) 70%, transparent 100%)",
+        }}
+        animate={{ top: ["20%", "80%", "20%"] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       {/* Subtle dot grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.05]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="dotGrid" width="40" height="40" patternUnits="userSpaceOnUse">

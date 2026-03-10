@@ -14,9 +14,14 @@ export default function Navbar({ onOpenForm }: NavbarProps) {
   const [, navigate] = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const container = document.querySelector(".snap-scroll-container");
+    const handleScroll = () => {
+      const scrollTop = container ? container.scrollTop : window.scrollY;
+      setScrolled(scrollTop > 40);
+    };
+    const target = container || window;
+    target.addEventListener("scroll", handleScroll, { passive: true });
+    return () => target.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (

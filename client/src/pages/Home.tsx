@@ -18,29 +18,18 @@ export default function Home() {
   const [formOpen, setFormOpen] = useState(false);
 
   return (
-    <div className="min-h-screen relative noise-overlay" style={{ backgroundColor: "#0D0D1A" }}>
+    <div className="relative noise-overlay snap-scroll-container" style={{ backgroundColor: "#0D0D1A" }}>
       <Navbar onOpenForm={() => setFormOpen(true)} />
 
       <main>
-        <HeroSection onOpenForm={() => setFormOpen(true)} />
-
-        <div className="section-divider" />
-        <ProblemSolutionSection />
-
-        <div className="section-divider" />
-        <StatsSection />
-
-        <div className="section-divider" />
-        <CapabilitiesSection />
-
-        <div className="section-divider" />
-        <DeploymentSection />
-
-        <div className="section-divider" />
-        <CTASection onOpenForm={() => setFormOpen(true)} />
+        <section className="snap-section"><HeroSection onOpenForm={() => setFormOpen(true)} /></section>
+        <section className="snap-section"><ProblemSolutionSection /></section>
+        <section className="snap-section"><StatsSection /></section>
+        <section className="snap-section"><CapabilitiesSection /></section>
+        <section className="snap-section"><DeploymentSection /></section>
+        <section className="snap-section"><CTASection onOpenForm={() => setFormOpen(true)} /></section>
+        <section className="snap-section snap-section-auto"><Footer /></section>
       </main>
-
-      <Footer />
 
       <LeadCaptureForm
         isOpen={formOpen}

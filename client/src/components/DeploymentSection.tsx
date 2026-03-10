@@ -52,17 +52,32 @@ export default function DeploymentSection() {
         <img
           src={DEPLOY_BG}
           alt=""
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover opacity-25"
           aria-hidden="true"
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, #0A0A16 0%, rgba(10,10,22,0.92) 40%, rgba(10,10,22,0.92) 60%, #0D0D1A 100%)",
+              "linear-gradient(180deg, #0A0A16 0%, rgba(10,10,22,0.88) 40%, rgba(10,10,22,0.88) 60%, #0D0D1A 100%)",
           }}
         />
       </div>
+
+      {/* Animated teal sweep */}
+      <motion.div
+        className="absolute rounded-full blur-[160px] pointer-events-none"
+        style={{
+          width: 500,
+          height: 500,
+          background: "radial-gradient(circle, rgba(0,217,166,0.08) 0%, transparent 70%)",
+        }}
+        animate={{
+          left: ["-10%", "110%"],
+          top: ["20%", "60%"],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="container relative z-10">
         {/* Headline */}

@@ -31,17 +31,16 @@ export default function StatsSection() {
 
   return (
     <section
-      className="relative py-32 lg:py-44 overflow-hidden"
-      style={{ backgroundColor: "#0A0A16" }}
+      className="relative py-32 lg:py-44 overflow-hidden aurora-bg shimmer-border"
       ref={ref}
     >
-      {/* Ambient glow */}
+      {/* Ambient glow — stronger */}
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[140px]"
         style={{
-          width: 600,
-          height: 600,
-          background: "radial-gradient(circle, rgba(0,217,166,0.05) 0%, transparent 70%)",
+          width: 700,
+          height: 700,
+          background: "radial-gradient(circle, rgba(0,217,166,0.12) 0%, rgba(124,107,240,0.06) 50%, transparent 70%)",
         }}
         animate={{
           scale: [1, 1.15, 0.9, 1],
@@ -72,8 +71,9 @@ export default function StatsSection() {
               key={stat.label}
               className="relative p-8 md:p-10 lg:p-12 rounded-2xl overflow-hidden group"
               style={{
-                backgroundColor: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.06)",
+                backgroundColor: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                backdropFilter: "blur(12px)",
               }}
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
